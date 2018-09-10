@@ -1,0 +1,23 @@
+.ql-editor {
+    min-height: 200px;
+    overflow-y:  auto;
+    max-height: 300px;
+}
+.exResult{    
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #28a745;
+}
+.exSynomps{    
+    height: 200px;
+    overflow: auto;
+    border: 1px solid #28a745;
+}
+.pd5{
+    padding: 5px;
+}
+
+.hDisplay{
+    padding: 10px;
+    width: 100%;
+}

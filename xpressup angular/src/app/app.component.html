@@ -1,0 +1,72 @@
+<div class="table-responsive">
+  <div class="modal-body">
+      <form id="profilesetting" class="col-sm-12" [formGroup]="searchForm" novalidate autocomplete="off">
+          <div class="row">             
+              <div class="form-group col-lg-3">                  
+                  <ui-switch (change)="onChange($event)"></ui-switch>
+                  <label>Fuzzy Search {{fuzzyName}}</label>
+                  <!-- <select class="form-control" formControlName="depth" >  
+                    <option class="form-search" *ngFor="let item of depthList" [ngValue]="item"> {{item}}</option>
+                </select> -->
+              </div>
+              <div class="form-group col-lg-2">
+                  <label>Filter</label>
+                  <select class="form-control" formControlName="filter" >  
+                    <option class="form-search" *ngFor="let item of filterList" [ngValue]="item"> {{item}}</option>
+                </select>
+              </div>    
+              <div class="form-group col-lg-4">
+                <label>Search Name</label>                         
+                <input class="form-control"  id="Name" type="text" formControlName="searchName" autocomplete="off">
+            </div>  
+            <div class="col-lg-3">
+              <button type="submit" (click)="onSubmit(searchForm)" style="margin-top: 32px;" class="btn btn-md">Search</button>  
+            </div>                  
+          </div>
+      </form>                    
+  </div> 
+</div>
+  <div class="row hDisplay">
+      <div class="col-lg-6">
+        <quill-editor #editor [modules]="modules" (onEditorCreated)="addBindingCreated($event)" (onSelectionChanged)="logSelection($event);" [(ngModel)]="my_string"></quill-editor>
+        <span>Your selected word =<strong>{{wordSelection}}</strong></span>
+        <br/>
+       <span>You press shortcut key =<strong>{{keyPress}}</strong> </span>
+       <br/>
+      <!--  <span>Search Event =<strong>{{searchEvent}}</strong></span> -->
+      </div>
+      <div class="col-lg-6">
+       
+              <div>
+                  <div>
+                      <label>Xpressions Total ={{response.total}}</label>
+                    </div>
+                <div class="exResult">
+                  <ul>
+                    <li *ngFor="let item of response.data">
+                      {{item.phrase}}
+                   </li>
+                  </ul>
+                </div>    
+              </div>           
+        
+        
+          <div>
+            <div class="pd5">
+              <button type="button" (click)="synClick()" class="btn btn-primary">Synonyms</button>
+              <button type="button" (click)="antClick()" class="btn btn-success">Antonyms</button>
+            </div>
+            <span>
+              <label>Xpressions of {{proName}} Total ={{proResponse.total}} </label>
+            </span>
+            <div class="exSynomps">
+              <ul>
+                <li *ngFor="let item of proResponse.data">
+                  {{item.phrase}}
+               </li>
+              </ul>
+            </div>   
+          </div> 
+       
+      </div>
+  </div>
