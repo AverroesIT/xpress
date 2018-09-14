@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 .ql-editor {
-    min-height: 200px;
+    height: 250px;
+    min-height: 150px;
     overflow-y:  auto;
-    max-height: 300px;
+    max-height: 450px;
+    background-color: white;
+    border: 1px solid #28a745;
+
 }
+

@@ -18,12 +18,12 @@ import { QuillModule } from 'ngx-quill';
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,   
+    FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
     QuillModule,
     UiSwitchModule
-  ],
+    ],
   providers: [
     Config,
     SearchResultService

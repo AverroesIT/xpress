@@ -1,49 +1,109 @@
-<div class="table-responsive">
-  <div class="modal-body">
-      <form id="profilesetting" class="col-sm-12" [formGroup]="searchForm" novalidate autocomplete="off">
-          <div class="row">             
-              <div class="form-group col-lg-3">                  
-                  <ui-switch (change)="onChange($event)"></ui-switch>
-                  <label>Fuzzy Search {{fuzzyName}}</label>
-                  <!-- <select class="form-control" formControlName="depth" >  
-                    <option class="form-search" *ngFor="let item of depthList" [ngValue]="item"> {{item}}</option>
-                </select> -->
-              </div>
-              <div class="form-group col-lg-2">
-                  <label>Filter</label>
-                  <select class="form-control" formControlName="filter" >  
-                    <option class="form-search" *ngFor="let item of filterList" [ngValue]="item"> {{item}}</option>
-                </select>
-              </div>    
-              <div class="form-group col-lg-4">
-                <label>Search Name</label>                         
-                <input class="form-control"  id="Name" type="text" formControlName="searchName" autocomplete="off">
-            </div>  
-            <div class="col-lg-3">
-              <button type="submit" (click)="onSubmit(searchForm)" style="margin-top: 32px;" class="btn btn-md">Search</button>  
-            </div>                  
+<div class="container-fluid">
+ 
+
+  <div style="background-color:#FFFF99">
+
+      <nav class="navbar navbar-expand-lg navbar-light">
+          <a class="navbar-brand" href="#"></a>
+          <img height="70" width="70" src="assets/img/logoxpressup.png">
+          <h1>XpressUp</h1>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              
+              
+              
+              
+            </ul>
+
+            <button type="button" class="btn btn-link" ><b> Info</b></button>
+
+            <button type="button" class="btn btn-link"><b>Demo</b></button>
+
+            <button type="button" class="btn btn-link"><b>Next Version Glimpse</b></button>
+
+            <button type="button" class="btn btn-link"><b>Write2Us</b></button>
+
+
+
+
+
+
+
           </div>
-      </form>                    
-  </div> 
-</div>
+        </nav>
+
+  </div>
+
+
+
   <div class="row hDisplay">
       <div class="col-lg-6">
-        <quill-editor #editor [modules]="modules" (onEditorCreated)="addBindingCreated($event)" (onSelectionChanged)="logSelection($event);" [(ngModel)]="my_string"></quill-editor>
+        <div class="row">
+          <div class="col-lg-12">
+
+          
+              <div class="table-responsive">
+                  <div class="modal-body">
+                      <form id="profilesetting"  class="col-sm-12" [formGroup]="searchForm" novalidate autocomplete="off">
+                         
+                        <div class="row">             
+                              <div class="form-group col-lg-3" >                  
+                                  <label>Fuzzy Search {{fuzzyName}}</label>  
+                                <ui-switch (change)="onChange($event)"></ui-switch>
+                                  
+                                  <!-- <select class="form-control" formControlName="depth" >  
+                                    <option class="form-search" *ngFor="let item of depthList" [ngValue]="item"> {{item}}</option>
+                                </select> -->
+                              </div>
+                
+                              <div class="form-group col-lg-2">
+                                  <label>Filter</label>
+                                  <select class="form-control" formControlName="filter" >  
+                                    <option class="form-search" *ngFor="let item of filterList" [ngValue]="item"> {{item}}</option>
+                                </select>
+                              </div> 
+                
+                              <div class="form-group col-lg-4">
+                                <label title="Please enter word" >Search</label>                         
+                                <input placeholder="Enter word" class="form-control"  id="Name" type="text" formControlName="searchName" autocomplete="off">
+                            </div>    
+                
+                            <div class="col-lg-3">
+                              <button type="submit" (click)="onSubmit(searchForm)" style="margin-top: 32px; margin-left:-30px" class="btn btn-md btn-info"><i class="fas fa-search"></i></button>  
+                            </div>                  
+                          </div>
+                      </form>                    
+                  </div> 
+                </div>
+                
+
+
+              
+      
+              
+
+          </div>
+        </div>
+        <quill-editor #editor [modules]='modules' (onEditorCreated)="addBindingCreated($event)" (onSelectionChanged)="logSelection($event);" [(ngModel)]="my_string"></quill-editor>
         <span>Your selected word =<strong>{{wordSelection}}</strong></span>
         <br/>
        <span>You press shortcut key =<strong>{{keyPress}}</strong> </span>
        <br/>
       <!--  <span>Search Event =<strong>{{searchEvent}}</strong></span> -->
       </div>
-      <div class="col-lg-6">
-       
-              <div>
-                  <div>
+
+
+      <div class="col-lg-6" >
+          <div>
+                  <div style="background-color:darkslategray; color:white; height:50px; padding:10px">
                       <label>Xpressions Total ={{response.total}}</label>
+
+                      <button type="button" class="btn btn-info float-right" >clear</button>
+
                     </div>
                 <div class="exResult">
                   <ul>
-                    <li *ngFor="let item of response.data">
+                    <li *ngFor='let item of response.data'>
                       {{item.phrase}}
                    </li>
                   </ul>
@@ -52,14 +112,20 @@
         
         
           <div>
-            <div class="pd5">
+          <!--   <div class="pd5">
               <button type="button" (click)="synClick()" class="btn btn-primary">Synonyms</button>
               <button type="button" (click)="antClick()" class="btn btn-success">Antonyms</button>
-            </div>
-            <span>
+            </div> -->
+            <div style="background-color:darkslategray; color:white; height:50px; padding:10px">
+            <span >
               <label>Xpressions of {{proName}} Total ={{proResponse.total}} </label>
+              <button type="button" class="btn btn-info float-right">Clear</button>
+              
+              <button type="button" class="btn btn-info  float-right">Select All</button>
             </span>
-            <div class="exSynomps">
+          </div>
+            
+            <div class="exSynomps" >
               <ul>
                 <li *ngFor="let item of proResponse.data">
                   {{item.phrase}}
@@ -70,3 +136,21 @@
        
       </div>
   </div>
+
+  <div style=" background-color: #FFFF99">
+    <!-- Footer -->
+<footer class="page-footer font-small blue">
+
+<!-- Copyright -->
+<div class="footer-copyright text-center py-3">© 2018 Copyright:
+  <a href="http://http://xpressup.com/"> XpressUp.com</a>
+</div>
+<!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+</div>
+
+
+
+</div>

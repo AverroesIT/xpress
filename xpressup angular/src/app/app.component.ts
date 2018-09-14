@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
+import { faCoffee } from '@fortawesome/fontawesome-free';
+
 
 import { SearchResultService } from './services/search-result.service';
 import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
@@ -14,18 +16,18 @@ import Quill from 'quill';
 export class AppComponent implements OnInit {
   title = 'app';
   searchForm: FormGroup;
-  depthList : any[] = [];
-  filterList : any[] = [];
-  response : any[] = [];
-  keyPress :any;
-  wordSelection :any;
-  searchEvent :any;
-  showNhide : Boolean = true;
-  termsResponse : any;
-  fuzzy : any = false;
-  fuzzyName : String = "Off";
-  proName : String;
-  proResponse : any[] =[];
+  depthList: any[] = [];
+  filterList: any[] = [];
+  response: any[] = [];
+  keyPress: any;
+  wordSelection: any;
+  searchEvent: any;
+  showNhide: Boolean = true;
+  termsResponse: any;
+  fuzzy: any = false;
+  fuzzyName: String = 'Off';
+  proName: String;
+  proResponse: any[] = [];
   /* modules = {
     keyboard: {
       bindings: {
@@ -59,15 +61,15 @@ export class AppComponent implements OnInit {
   }; */
   public my_string: any = null;
 
-  @ViewChild('editor') editor: QuillEditorComponent
+  @ViewChild('editor') editor: QuillEditorComponent;
 
-  constructor(private fb: FormBuilder, private searchService : SearchResultService) { 
-    this.depthList.push("Low");
-    this.depthList.push("Medium");
-    this.depthList.push("High");
+  constructor(private fb: FormBuilder, private searchService: SearchResultService) {
+    this.depthList.push('Low');
+    this.depthList.push('Medium');
+    this.depthList.push('High');
 
-    this.filterList.push("OR");
-    this.filterList.push("AND");
+    this.filterList.push('OR');
+    this.filterList.push('AND');
 
     /* const values = [
       { id: 1, value: 'Fredrik Sundqvist' },
@@ -92,7 +94,6 @@ export class AppComponent implements OnInit {
         },
       }
     } */
-    
   }
 
   ngOnInit() {
@@ -103,34 +104,34 @@ export class AppComponent implements OnInit {
   profileFormBuild(): void {
     this.searchForm = this.fb.group({
       searchName: [],
-      depth: ["Medium"],
-      filter: ["OR"],
+      depth: ['Medium'],
+      filter: ['OR'],
       fuzzy : [false],
-      property :[]
+      property : []
     });
   }
 
   onSubmit(searchForm: FormGroup) {
-    this.showNhide = true;   
+    this.showNhide = true;
     this.proResponse = [];
-    this.proName ="";
-    this.searchService.searchNResult(searchForm.value).subscribe((result : any[])=>{
-      console.log("Result comes");
+    this.proName = '';
+    this.searchService.searchNResult(searchForm.value).subscribe((result: any[]) => {
+      console.log('Result comes');
       this.response = result;
-    },(error : any) =>{
-      console.log("search result Loading Error :"+error);        
+    }, (error: any) => {
+      console.log('search result Loading Error :' + error);
     });
-  };
+  }
 
-  onLook(word : any) {
-    this.showNhide = false;   
-    this.searchService.searchNTerms(word).subscribe((result : any)=>{
-      console.log("Result comes of terms");
+  onLook(word: any) {
+    this.showNhide = false;
+    this.searchService.searchNTerms(word).subscribe((result: any) => {
+      console.log('Result comes of terms');
       this.termsResponse = result;
-    },(error : any) =>{
-      console.log("search result Loading Error :"+error);        
+    }, (error: any) => {
+      console.log('search result Loading Error :' + error);
     });
-  };
+  }
 
   @HostListener('window:keypress', ['$event'])
   keyEvent(event: KeyboardEvent) {
@@ -147,9 +148,9 @@ export class AppComponent implements OnInit {
 
   @HostListener('window:keydown', ['$event'])
   keyEventDown(event: KeyboardEvent) {
-    var text = event.view.getSelection().toString();
-    this.keyPress = "";
-    this.searchEvent = "";
+    const text = event.view.getSelection().toString();
+    this.keyPress = '';
+    this.searchEvent = '';
     /* console.log("Text="+text); */
     console.log(event.keyCode);
 /*     if(event.ctrlKey && event.keyCode == 'A'.charCodeAt(0)){
@@ -216,16 +217,16 @@ export class AppComponent implements OnInit {
       //your saving code
     } */
 
-    if(event.ctrlKey && event.keyCode == 'L'.charCodeAt(0)){
+    if (event.ctrlKey && event.keyCode === 'L'.charCodeAt(0)) {
       event.preventDefault();
       this.wordSelection = text;
-      this.keyPress = "Ctrl + L";
-      this.searchEvent = "Synonms, Antonyms, Homophones";
-      this.searchForm.get("searchName").setValue(text);
+      this.keyPress = 'Ctrl + L';
+      this.searchEvent = 'Synonms, Antonyms, Homophones';
+      this.searchForm.get('searchName').setValue(text);
       this.onSubmit(this.searchForm);
      /*  this.onLook(text); */
-        console.log("Ctrl + L Called");
-      //your saving code
+        console.log('Ctrl + L Called');
+      // your saving code
     }
 
   }
@@ -253,42 +254,42 @@ export class AppComponent implements OnInit {
 
   }
 
-  onChange($event: any){
-       if(this.fuzzy){
+  onChange($event: any) {
+       if (this.fuzzy) {
           this.fuzzy = false;
-          this.fuzzyName = "Off";
-          this.searchForm.get("fuzzy").setValue(false);
+          this.fuzzyName = 'Off';
+          this.searchForm.get('fuzzy').setValue(false);
        } else {
          this.fuzzy = true;
-         this.fuzzyName = "On";
-         this.searchForm.get("fuzzy").setValue(true);
+         this.fuzzyName = 'On';
+         this.searchForm.get('fuzzy').setValue(true);
        }
-       console.log("Fuzzyness ="+this.fuzzy);
-  }  
+       console.log('Fuzzyness =' + this.fuzzy);
+  }
 
-  synClick(){
-    console.log("Syn Click");
-    this.searchForm.get("property").setValue("Synonyms");
-    this.proName = "Synonyms";
+  synClick() {
+    console.log('Syn Click');
+    this.searchForm.get('property').setValue('Synonyms');
+    this.proName = 'Synonyms';
     this.proResponse = [];
     this.propertyClick();
   }
 
-  antClick(){
-    console.log("Ant Click");
-    this.searchForm.get("property").setValue("Antonyms");
-    this.proName = "Antonyms";
+  antClick() {
+    console.log('Ant Click');
+    this.searchForm.get('property').setValue('Antonyms');
+    this.proName = 'Antonyms';
     this.proResponse = [];
     this.propertyClick();
   }
 
-  propertyClick(){ 
-      this.searchService.propertyResult(this.searchForm.value).subscribe((result : any[])=>{
-        console.log("property result comes");
+  propertyClick() {
+      this.searchService.propertyResult(this.searchForm.value).subscribe((result: any[]) => {
+        console.log('property result comes');
         this.proResponse = result;
-      },(error : any) =>{
-        console.log("property result Loading Error :"+error);        
-      });    
+      }, (error: any) => {
+        console.log('property result Loading Error :' + error);
+      });
   }
 
 }
