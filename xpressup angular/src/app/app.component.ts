@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
-import { faCoffee } from '@fortawesome/fontawesome-free';
 
 
 import { SearchResultService } from './services/search-result.service';
