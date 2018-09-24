@@ -12,13 +12,13 @@ export class SearchResultService {
   constructor(private config: Config, private http: HttpClient) { }
 
   searchNResult(searchForm): Observable< any[] > {
-		return this.http.post< any[]>(this.config._searchNResult,searchForm).map((result: any[]) => {
-			return result;
-	    }, error => {
-	      console.log(error);
-	      alert('Search result view fetch wrong data');
-	    }).first();
-	};
+			return this.http.post< any[]>(this.config._searchNResult, searchForm).map((result: any[]) => {
+				return result;
+	    	}, error => {
+	      	console.log(error);
+	      	alert('Search result view fetch wrong data');
+	    	}).first();
+		}
 
 searchNTerms(word): Observable<any> {
 		return this.http.get<any>(this.config._searchNTerms + word).map((result: any) => {

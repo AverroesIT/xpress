@@ -23,7 +23,6 @@
     "@angular/router": "^5.2.0",
     "bootstrap": "^4.1.0",
     "core-js": "^2.4.1",
-    "jquery": "^3.3.1",
     "ng2-ckeditor": "^1.2.0",
     "ngx-bootstrap": "^2.0.3",
     "ngx-quill": "^3.1.0",

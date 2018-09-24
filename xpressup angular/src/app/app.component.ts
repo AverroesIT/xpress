@@ -1,3 +1,5 @@
+// @ts-check
+
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, FormArray } from '@angular/forms';
 
@@ -7,12 +9,14 @@ import { QuillEditorComponent } from 'ngx-quill/src/quill-editor.component';
 import Quill from 'quill';
 
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
   title = 'app';
   searchForm: FormGroup;
   depthList: any[] = [];
@@ -27,6 +31,9 @@ export class AppComponent implements OnInit {
   fuzzyName: String = 'Off';
   proName: String;
   proResponse: any[] = [];
+
+
+
   /* modules = {
     keyboard: {
       bindings: {
@@ -99,6 +106,26 @@ export class AppComponent implements OnInit {
     this.profileFormBuild();
   }
 
+  functionName(item: any) {
+    this.proResponse.push(item);
+    console.log(this.proResponse);
+    this.proResponse.total = this.proResponse.length;
+  }
+
+  erase(res: any[]): void {
+    res.length = 0;
+    this.response.total = 0;
+  }
+
+  clicked(): void {
+    this.proResponse.length = 0;
+    this.proResponse.total = 0;
+  }
+
+  select(e) {
+
+    console.log(e);
+  }
 
   profileFormBuild(): void {
     this.searchForm = this.fb.group({
@@ -266,22 +293,22 @@ export class AppComponent implements OnInit {
        console.log('Fuzzyness =' + this.fuzzy);
   }
 
-  synClick() {
+  /* synClick() {
     console.log('Syn Click');
     this.searchForm.get('property').setValue('Synonyms');
     this.proName = 'Synonyms';
     this.proResponse = [];
     this.propertyClick();
-  }
+  } */
 
-  antClick() {
+/*   antClick() {
     console.log('Ant Click');
     this.searchForm.get('property').setValue('Antonyms');
     this.proName = 'Antonyms';
     this.proResponse = [];
     this.propertyClick();
   }
-
+ */
   propertyClick() {
       this.searchService.propertyResult(this.searchForm.value).subscribe((result: any[]) => {
         console.log('property result comes');

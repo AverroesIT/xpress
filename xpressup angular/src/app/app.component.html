@@ -97,13 +97,12 @@
           <div>
                   <div style="background-color:darkslategray; color:white; height:50px; padding:10px">
                       <label>Xpressions Total ={{response.total}}</label>
-
-                      <button type="button" class="btn btn-info float-right" >clear</button>
+                      <button type="button" (click)="erase(response.data)" class="btn btn-info float-right" >Clear</button>
 
                     </div>
                 <div class="exResult">
                   <ul>
-                    <li *ngFor='let item of response.data'>
+                    <li *ngFor='let item of response.data' (click)="functionName(item)">
                       {{item.phrase}}
                    </li>
                   </ul>
@@ -119,15 +118,15 @@
             <div style="background-color:darkslategray; color:white; height:50px; padding:10px">
             <span >
               <label>Xpressions of {{proName}} Total ={{proResponse.total}} </label>
-              <button type="button" class="btn btn-info float-right">Clear</button>
+              <button type="button" class="btn btn-info float-right" (click)="clicked()">Clear</button>
               
-              <button type="button" class="btn btn-info  float-right">Select All</button>
+              <button type="button" class="btn btn-info  float-right" (click)="select($event)">Select All</button>
             </span>
           </div>
             
             <div class="exSynomps" >
               <ul>
-                <li *ngFor="let item of proResponse.data">
+                <li *ngFor="let item of proResponse">
                   {{item.phrase}}
                </li>
               </ul>
@@ -139,7 +138,7 @@
 
   <div style=" background-color: #FFFF99">
     <!-- Footer -->
-<footer class="page-footer font-small blue">
+<footer class="page-footer  font-small blue">
 
 <!-- Copyright -->
 <div class="footer-copyright text-center py-3">© 2018 Copyright:
